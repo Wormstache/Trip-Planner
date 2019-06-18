@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', 'PagesController@master');
+Route::get('/agent', 'PagesController@agent');
+Route::get('/customer', 'PagesController@customer');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
