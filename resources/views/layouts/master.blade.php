@@ -121,6 +121,30 @@
               <i class="ni ni-planet text-blue"></i> Create Agent
             </a>
           </li>
+          <!-- Agent List Link -->
+          <li class="nav-item">
+            <a class="nav-link active" href="{{asset('agentList')}}">
+              <i class="ni ni-planet text-blue"></i> Agent List
+            </a>
+          </li>
+          <!-- Customer List Link -->
+          <li class="nav-item">
+            <a class="nav-link active" href="{{asset('customerList')}}">
+              <i class="ni ni-planet text-blue"></i> Customer List
+            </a>
+          </li>
+          <!-- Blog Link -->
+          <li class="nav-item">
+            <a class="nav-link active" href="{{asset('blogCreate')}}">
+              <i class="ni ni-planet text-blue"></i> Create Blog
+            </a>
+          </li>
+          <!-- Blog List -->
+          <li class="nav-item">
+            <a class="nav-link active" href="{{asset('blogList')}}">
+              <i class="ni ni-planet text-blue"></i> Blog List
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="../examples/maps.html">
               <i class="ni ni-pin-3 text-orange"></i> Maps
@@ -283,6 +307,16 @@
   <script src="{{ asset('template/vendor/clipboard/dist/clipboard.min.js') }}"></script>
   <!-- Argon JS -->
   <script src="{{ asset('template/js/argon.js?v=1.0.0') }}"></script>
+  <!-- datatable -->
+        <!-- JS-->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <!-- Css-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script>
+            $(document).ready(function() {
+                $('#table').DataTable();
+            } );
+        </script>
 </body>
 
 </html>

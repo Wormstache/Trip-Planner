@@ -21,6 +21,10 @@ Route::get('customer', 'PagesController@customer');
 
 Auth::routes();
 
-Route::resource('agentCreate','AgentCreateController');
+Route::resource('agentCreate','AgentDetailsController');
+Route::resource('agentList','AgentListController');
+Route::resource('customerList','CustomerListController');
+Route::resource('blogCreate','BlogController');
+Route::resource('blogList','BlogListController');
 
 Route::get('/home', 'HomeController@index')->name('home');

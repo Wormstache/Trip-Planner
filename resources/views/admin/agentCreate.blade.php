@@ -21,7 +21,7 @@
                 {{ csrf_field() }}
 
                     <div class="form-group mx-auto">
-                        <label for="name">Name:</label>
+                        <label for="name">Full Name:</label>
                         <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" value="{{ old('name') }}" required>
                         @if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
@@ -29,7 +29,27 @@
                             </span>
                         @endif
                     </div>
-                
+
+                    <div class="form-group mx-auto">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" name="address" value="{{ old('address') }}" required>
+                        @if ($errors->has('address'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('address') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="form-group mx-auto">
+                        <label for="contact_no">Contact:</label>
+                        <input type="text" class="form-control {{ $errors->has('contact_no') ? ' is-invalid' : '' }}" id="contact_no" name="contact_no" value="{{ old('contact_no') }}" required>
+                        @if ($errors->has('contact_no'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('contact_no') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                                    
                     <div class="form-group mx-auto">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" required>

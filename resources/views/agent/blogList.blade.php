@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Agents List')
+@section('title', 'Blog List')
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-header border-0">
-                    <h3 class="mb-0 text-center">Agent List</h3>
+                    <h3 class="mb-0 text-center">Blog List</h3>
                 </div>
                 <!-- error message -->
                 @if($errors->any())
@@ -37,26 +37,26 @@
                     <table class="table align-items-center table-flush" id="table"></h5>
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Contact</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Image</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($lists as $list)
+                            @foreach($blogs as $blog)
                             <tr>
-                                <td data-title="Name">{{$list->name}}</td>
-                                <td data-title="Address">{{$list->address}}</td>
-                                <td data-title="Contact">{{$list->contact_no}}</td>
-                                <td data-title="Email">{{$list->email}}</td>
+                                <td data-title="Name">{{$blog->agent->name}}</td>
+                                <td data-title="description">{{$blog->title}}</td>
+                                <td data-title="Contact">{{$blog->description}}</td>
+                                <td data-title="Email">{{$blog->filename}}</td>
                                 <td>
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#agentEdit{{ $list->id }}" href="{{ route('agentList.edit',$list->id) }}">Edit</i></button> 
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#blogEdit{{ $blog->id }}" href="{{ route('blogList.edit',$blog->id) }}">Edit</i></button> 
                                 </td>
                                 <td>
-                                    <form action="{{ route('agentList.destroy', $list->id) }}" method="post">
+                                    <form action="{{ route('blogList.destroy', $blog->id) }}" method="post">
                                         <input type="hidden" name="_token" value="{{ csrf_token()}}">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
@@ -72,35 +72,31 @@
         </div>
     </div>
     
-    @foreach($lists as $list)
-    <div class="modal fade" id="agentEdit{{ $list->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @foreach($blogs as $blog)
+    <div class="modal fade" id="blogEdit{{ $blog->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form name="list" action="{{ route('agentList.update', $list->id) }}" method="post" enctype="multipart/form-data">
+                <form name="blog" action="{{ route('blogList.update', $blog->id) }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="PATCH">
                     {{ csrf_field() }}
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agent List Edit</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Blog Edit</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{$list->name}}">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{$blog->title}}">
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="{{$list->address}}">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" value="{{$blog->description}}">
                         </div>
                         <div class="form-group">
-                            <label for="contact_no">Contact</label>
-                            <input type="text" class="form-control" id="contact_no" name="contact_no" value="{{$list->contact_no}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{$list->email}}">
+                            <label for="filename">Image</label>
+                            <input type="text" class="form-control" id="filename" name="filename" value="{{$blog->filename}}">
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -1,62 +1,63 @@
 @extends('layouts.master')
-@section('title', 'Agents List')
+@section('title', 'Customer List')
 
 @section('content')
+
+<h2 class="text-center">Agent Table</h2>
+
+<!-- error message -->
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            {{$error}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endforeach
+@endif
+
+<!-- Success Message -->
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{session('success')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
 <!-- Table -->
     <div class="row">
         <div class="col">
             <div class="card shadow">
                 <div class="card-header border-0">
-                    <h3 class="mb-0 text-center">Agent List</h3>
+                    <h3 class="mb-0">Customer List</h3>
                 </div>
-                <!-- error message -->
-                @if($errors->any())
-                    @foreach($errors->all() as $error)
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            {{$error}}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endforeach
-                @endif
-
-                <!-- Success Message -->
-                @if(session('success'))
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        {{session('success')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-
-                <!-- table -->
                 <div class="table-responsive"><h5>
                     <table class="table align-items-center table-flush" id="table"></h5>
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Full Name</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Contact</th>
+                                <th scope="col">Contact_no</th>
                                 <th scope="col">Email</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($lists as $list)
+                            @foreach($customers as $customer)
                             <tr>
-                                <td data-title="Name">{{$list->name}}</td>
-                                <td data-title="Address">{{$list->address}}</td>
-                                <td data-title="Contact">{{$list->contact_no}}</td>
-                                <td data-title="Email">{{$list->email}}</td>
+                                <td data-title="Name">{{$customer->name}}</td>
+                                <td data-title="Name">{{$customer->address}}</td>
+                                <td data-title="Name">{{$customer->contact_no}}</td>
+                                <td data-title="Email">{{$customer->email}}</td>
                                 <td>
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#agentEdit{{ $list->id }}" href="{{ route('agentList.edit',$list->id) }}">Edit</i></button> 
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#customerEdit{{ $customer->id }}" href="{{ route('customerList.edit',$customer->id) }}">Edit</i></button> 
                                 </td>
                                 <td>
-                                    <form action="{{ route('agentList.destroy', $list->id) }}" method="post">
+                                    <form action="{{ route('customerList.destroy', $customer->id) }}" method="post">
                                         <input type="hidden" name="_token" value="{{ csrf_token()}}">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
@@ -72,35 +73,35 @@
         </div>
     </div>
     
-    @foreach($lists as $list)
-    <div class="modal fade" id="agentEdit{{ $list->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @foreach($customers as $customer)
+    <div class="modal fade" id="customerEdit{{ $customer->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form name="list" action="{{ route('agentList.update', $list->id) }}" method="post" enctype="multipart/form-data">
+                <form name="customer" action="{{ route('customerList.update', $customer->id) }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="PATCH">
                     {{ csrf_field() }}
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agent List Edit</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Student List Edit</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{$list->name}}">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{$customer->name}}">
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="{{$list->address}}">
+                            <input type="text" class="form-control" id="address" name="address" value="{{$customer->address}}">
                         </div>
                         <div class="form-group">
                             <label for="contact_no">Contact</label>
-                            <input type="text" class="form-control" id="contact_no" name="contact_no" value="{{$list->contact_no}}">
+                            <input type="text" class="form-control" id="contact_no" name="contact_no" value="{{$customer->contact_no}}">
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{$list->email}}">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{$customer->email}}">
                         </div>
                     </div>
                     <div class="modal-footer">

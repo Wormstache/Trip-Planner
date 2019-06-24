@@ -17,6 +17,8 @@ class UserTableSeeder extends Seeder
 
         $admin = new User();
         $admin->name = 'Rasana Shakya';
+        $admin->address = 'Banasthali';
+        $admin->contact_no = '9843364569';
         $admin->email = 'shakyamuskan57@gmail.com';
         $admin->password = bcrypt('wormstache');
         $admin->save();

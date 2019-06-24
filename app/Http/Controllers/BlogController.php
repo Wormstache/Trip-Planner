@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\AgentCreate;
-use App\User;
-use App\Role;
+use App\Blog;
+use Image;
+use Auth;
 
-class AgentCreateController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class AgentCreateController extends Controller
      */
     public function index()
     {
-        return view('admin.agentCreate');
+        return view('agent.blogForm');
     }
 
     /**
@@ -38,25 +38,25 @@ class AgentCreateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email',
-            'password'=>'required|confirmed|min:8',
+            'title'=>'required',
+            'description'=>'required',
         ]);
-        
-        $user = User::create(request(['name', 'email', 'password']));
+            $blog= new Blog();
+            $blog->agent_id = Auth::user()->id;
+            $blog->title = $request->title;
+            $blog->description = $request->description;
 
-        $user
-            ->roles()
-            ->attach(Role::where('name', 'agent')->first());
+            //image
+            if($request->hasFile('filename')){
+                $image=$request->file('filename');
+                $namefile=time().'.'.$image->getClientOriginalExtension();
+                $location=public_path('image/'.$namefile);
+                Image::make($image)->resize(300,300)->save($location);
+                $blog->filename=$namefile;
+            }
 
-        $agent=new AgentCreate();
-        $agent->name = $request->name;
-        $agent->email = $request->email;
-        $agent->password = $request->password;
-
-        $agent->save();
-            
-        return redirect()->back()->with('user',$user)->with(['success'=>'Agent Successfully Registered']);
+            $blog->save();
+            return redirect()->back()->with(['success'=>'Blog Successfully Created']);
     }
 
     /**

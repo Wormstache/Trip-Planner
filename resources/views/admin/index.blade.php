@@ -4,9 +4,7 @@
 @section('content')
 
     <section>
-        <div class="row">
-            <p>This is an admin dashboard.</p>
-        </div>
+        <h1>This is an admin dashboard.</h1>
     </section>
 
 @endsection
