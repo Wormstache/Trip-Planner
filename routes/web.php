@@ -20,6 +20,11 @@ Route::get('agent', 'PagesController@agent');
 Route::get('customer', 'PagesController@customer');
 
 Auth::routes();
+// socialite route
+Route::get('login/{provider}', 'SocialController@redirect');
+Route::get('login/{provider}/callback', 'SocialController@Callback');
+
+
 
 Route::resource('agentCreate','AgentDetailsController');
 Route::resource('agentList','AgentListController');

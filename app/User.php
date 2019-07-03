@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','address', 'contact_no', 'email', 'password',
+        'name','address', 'contact_no', 'email', 'image', 'provider', 'provider_id', 'password',
     ];
 
     /**
@@ -50,6 +51,11 @@ class User extends Authenticatable
     public function roles()
     {
     return $this->belongsToMany(Role::class);
+    }
+
+    public function role_user()
+    {
+    return $this->belongsTo(RoleUser::class);
     }
 
     public function authorizeRoles($roles)

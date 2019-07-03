@@ -39,16 +39,16 @@
                         @endif
                     </div>
 
-                    <div class="form-group mx-auto">
-                        <label for="filename">Image:</label>
-                        <input type="file" class="form-control {{ $errors->has('filename') ? ' is-invalid' : '' }}" id="filename" name="filename" value="{{ old('filename') }}" required>
+                    <div class="form-group custom-file mx-auto">
+                        <label class="custom-file-label" for="filename"></label>
+                        <input type="file" class="form-control custom-file-input {{ $errors->has('filename') ? ' is-invalid' : '' }}" id="filename" name="filename" value="{{ old('filename') }}" required>
                         @if ($errors->has('filename'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('filename') }}</strong>
                             </span>
                         @endif
                     </div>
-                
+                    
                     <div class="form-group row">
                         <div class="col text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
