@@ -49,8 +49,8 @@
                             @foreach($blogs as $blog)
                             <tr>
                                 <td data-title="Name">{{$blog->agent->name}}</td>
-                                <td data-title="description">{{$blog->title}}</td>
-                                <td data-title="Contact">{{$blog->description}}</td>
+                                <td data-title="description">{{str_limit($blog->title,20)}}</td>
+                                <td data-title="Contact">{{str_limit($blog->description,30)}}</td>
                                 <td data-title="Email">{{$blog->filename}}</td>
                                 <td>
                                     <button class="btn btn-info" data-toggle="modal" data-target="#blogEdit{{ $blog->id }}" href="{{ route('blogList.edit',$blog->id) }}">Edit</i></button> 

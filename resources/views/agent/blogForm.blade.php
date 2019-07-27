@@ -39,9 +39,8 @@
                         @endif
                     </div>
 
-                    <div class="form-group custom-file mx-auto">
-                        <label class="custom-file-label" for="filename"></label>
-                        <input type="file" class="form-control custom-file-input {{ $errors->has('filename') ? ' is-invalid' : '' }}" id="filename" name="filename" value="{{ old('filename') }}" required>
+                    <div class="form-group mx-auto">
+                            <input type="file" class="form-control {{ $errors->has('filename') ? ' is-invalid' : '' }}" id="filename" name="filename" aria-describedby="filename" required>
                         @if ($errors->has('filename'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('filename') }}</strong>

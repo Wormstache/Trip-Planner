@@ -58,7 +58,9 @@ class AgentListController extends Controller
      */
     public function edit($id)
     {
-        $list=AgentDetail::findorFail($id);
+        $list=User::whereHas('roles',function($q){
+            $q->where('name','agent');
+        })->get();
         return view('admin.agentList')->with('list', $list);
     }
 

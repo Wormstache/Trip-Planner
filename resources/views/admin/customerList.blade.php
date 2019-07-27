@@ -50,8 +50,8 @@
                             @foreach($customers as $customer)
                             <tr>
                                 <td data-title="Name">{{$customer->name}}</td>
-                                <td data-title="Name">{{$customer->address}}</td>
-                                <td data-title="Name">{{$customer->contact_no}}</td>
+                                <td data-title="Address">{{$customer->address}}</td>
+                                <td data-title="Contact_no">{{$customer->contact_no}}</td>
                                 <td data-title="Email">{{$customer->email}}</td>
                                 <td>
                                     <button class="btn btn-info" data-toggle="modal" data-target="#customerEdit{{ $customer->id }}" href="{{ route('customerList.edit',$customer->id) }}">Edit</i></button> 
@@ -72,6 +72,8 @@
             </div>
         </div>
     </div>
+
+    
     
     @foreach($customers as $customer)
     <div class="modal fade" id="customerEdit{{ $customer->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

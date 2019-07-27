@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
-use App\RoleUser;
-use Illuminate\Support\Facades\DB;
 
 class CustomerListController extends Controller
 {
@@ -17,9 +14,9 @@ class CustomerListController extends Controller
      */
     public function index()
     {
-        $customerRole=RoleUser::where('role_id','3')->get('user_id');
-        $customers=User::where('id',$customerRole)->get();
-        dd($customers);
+        $customers=User::whereHas('roles',function($q){
+            $q->where('name','customer');
+        })->get();
         return view('admin.customerList')->with('customers',$customers);
         
     }

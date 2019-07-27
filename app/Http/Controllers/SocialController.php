@@ -38,7 +38,7 @@ class SocialController extends Controller
                 ]);
             }
             Auth::login($userEmail);
-            return redirect('/customer');
+            return redirect('/profile');
         }
         else{
             return back()->with('error','message');
