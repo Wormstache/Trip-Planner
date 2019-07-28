@@ -112,67 +112,67 @@
           <ul class="navbar-nav">
             @if(Auth::user()->hasRole('admin'))
             <li class="nav-item">
-              <a class="nav-link" href="../index.html">
+              <a class="nav-link @if(Request::is('dashboard')) active @endif" href="{{asset('dashboard')}}">
                 <i class="ni ni-tv-2 text-primary"></i> Dashboard
+              </a>
+            </li>
+            <!-- User List Link -->
+            <li class="nav-item">
+              <a class="nav-link @if(Request::is('userList')) active @endif" href="{{asset('userList')}}">
+                <i class="ni ni-single-02 text-blue"></i> User List
               </a>
             </li>
             <!-- Agent Registration Link -->
             <li class="nav-item">
-              <a class="nav-link active" href="{{asset('agentCreate')}}">
+              <a class="nav-link @if(Request::is('agentCreate')) active @endif" href="{{asset('agentCreate')}}">
                 <i class="ni ni-single-02 text-blue"></i> Create Agent
               </a>
             </li>
             <!-- Agent List Link -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('agentList')}}">
+              <a class="nav-link @if(Request::is('agentList')) active @endif" href="{{asset('agentList')}}">
                 <i class="ni ni-collection text-blue"></i> Agent List
-              </a>
-            </li>
-            <!-- Customer List Link -->
-            <li class="nav-item">
-              <a class="nav-link" href="{{asset('customerList')}}">
-                <i class="ni ni-collection text-blue"></i> Customer List
               </a>
             </li>
             <!-- Blog Link -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('blogCreate')}}">
+              <a class="nav-link @if(Request::is('blogCreate')) active @endif" href="{{asset('blogCreate')}}">
                 <i class="ni ni-align-center text-blue"></i> Create Blog
               </a>
             </li>
             <!-- Blog List -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('blogList')}}">
+              <a class="nav-link @if(Request::is('blogList')) active @endif" href="{{asset('blogList')}}">
                 <i class="ni ni-collection text-blue"></i> Blog List
               </a>
             </li>
             @elseif(Auth::user()->hasRole('agent'))
             <li class="nav-item">
-              <a class="nav-link" href="../index.html">
+              <a class="nav-link @if(Request::is('dashboard')) active @endif" href="{{asset('dashboard')}}">
                 <i class="ni ni-tv-2 text-primary"></i> Dashboard
               </a>
             </li>
             <!-- Customer List Link -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('customerList')}}">
+              <a class="nav-link @if(Request::is('customerList')) active @endif" href="{{asset('customerList')}}">
                 <i class="ni ni-collection text-blue"></i> Customer List
               </a>
             </li>
             <!-- Blog Link -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('blogCreate')}}">
+              <a class="nav-link @if(Request::is('blogCreate')) active @endif" href="{{asset('blogCreate')}}">
                 <i class="ni ni-align-center text-blue"></i> Create Blog
               </a>
             </li>
             <!-- Blog List -->
             <li class="nav-item">
-              <a class="nav-link" href="{{asset('blogList')}}">
+              <a class="nav-link @if(Request::is('blogList')) active @endif" href="{{asset('blogList')}}">
                 <i class="ni ni-collection text-blue"></i> Blog List
               </a>
             </li>
             @else
             <li class="nav-item">
-              <a class="nav-link" href="../index.html">
+              <a class="nav-link @if(Request::is('dashboard')) active @endif" href="{{asset('dashboard')}}">
                 <i class="ni ni-tv-2 text-primary"></i> Dashboard
               </a>
             </li>
@@ -287,17 +287,11 @@
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Team SPARK</a>
+                <a class="nav-link" target="_blank">Team SPARK</a>
               </li>
               <li class="nav-item">
                 <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-              </li>
+              </li> 
             </ul>
           </div>
         </div>
@@ -313,15 +307,15 @@
   <!-- Argon JS -->
   <script src="{{ asset('template/js/argon.js?v=1.0.0') }}"></script>
   <!-- datatable -->
-        <!-- JS-->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-        <!-- Css-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-        <script>
-            $(document).ready(function() {
-                $('#table').DataTable();
-            } );
-        </script>
+  <!-- JS-->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <!-- Css-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  <script>
+    $(document).ready(function() {
+      $('#table').DataTable();
+    } );
+  </script>
 </body>
 
 </html>

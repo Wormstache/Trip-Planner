@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\AgentDetail;
 use App\User;
 
-class AgentListController extends Controller
+class UserListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,8 @@ class AgentListController extends Controller
      */
     public function index()
     {
-        $lists=User::whereHas('roles',function($q){
-            $q->where('name','agent');
-        })->get();
-        return view('admin.agentList')->with('lists',$lists);
+        $users=User::all();
+        return view('admin.userList', compact('users'));
     }
 
     /**
@@ -61,8 +58,7 @@ class AgentListController extends Controller
      */
     public function edit($id)
     {
-        $list=User::findorFail($id);
-        return view('admin.agentList')->with('list', $list);
+        //
     }
 
     /**
@@ -74,21 +70,7 @@ class AgentListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'=>'required',
-            'address'=>'required',
-            'contact_no'=>'required',
-            'email'=>'required|email',
-        ]);
-            
-        $list=AgentDetail::find($id);
-        $list->name = $request->name;
-        $list->address = $request->address;
-        $list->contact_no = $request->contact_no;
-        $list->email = $request->email;
-
-        $list->update();
-        return redirect('/agentList')->with(['success'=>'Agent Successfully Updated']);
+        //
     }
 
     /**
@@ -99,8 +81,8 @@ class AgentListController extends Controller
      */
     public function destroy($id)
     {
-        $list=AgentDetail::findorFail($id);
-        $list->delete();
-        return redirect('/agentList')->with(['success'=>'Agent Successfully Deleted']);
+        $user=User::findorFail($id);
+        $user->delete();
+        return redirect('userList')->with(['success'=>'User has been blocked']);
     }
 }

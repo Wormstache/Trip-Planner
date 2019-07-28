@@ -38,7 +38,7 @@ class UserTableSeeder extends Seeder
                 'password'=>$faker->password(),
                 'image'=>$faker->imageUrl($width=640,$height=400),
                 'created_at' => \Carbon\Carbon::now(),
-        	    'updated_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ]);
             $admin->roles()->attach($role_agent);
         }

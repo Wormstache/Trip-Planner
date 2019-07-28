@@ -25,6 +25,7 @@ Route::get('contact', 'PagesController@contact')->name('contact');
 Route::post('contact', 'PagesController@contactForm')->name('contact.contactForm');
 Route::get('destination', 'PagesController@destination')->name('destination');
 Route::get('destinationDetail', 'PagesController@destinationDetail');
+Route::get('dashboard', 'PagesController@dashboard');
 
 Auth::routes();
 // socialite route
@@ -37,5 +38,6 @@ Route::resource('customerList','CustomerListController');
 Route::resource('blogCreate','BlogController');
 Route::resource('blogList','BlogListController');
 Route::resource('profile','ProfileController');
+Route::resource('userList','UserListController');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Customer;
+use App\Agent;
 use App\Blog;
 use App\Contact;
 use Illuminate\Support\Facades\Mail;    
@@ -58,5 +61,16 @@ class PagesController extends Controller
 
     public function destinationDetail(){
         return view('destinationDetail');
+    }
+
+    public function dashboard(){
+        $userCount=User::count();
+        $agentCount=User::whereHas('roles',function($q){
+            $q->where('name','agent');
+        })->count();
+        $customerCount=User::whereHas('roles',function($q){
+            $q->where('name','customer');
+        })->count();
+        return view('admin.dashboard',compact(['userCount', 'agentCount', 'customerCount']));
     }
 }
